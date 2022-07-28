@@ -1,0 +1,5 @@
+vendor/
+
+.docker/phpmyadmin
+
+composer.lock

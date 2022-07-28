@@ -1,0 +1,13 @@
+{
+    "require": {
+        "twig/twig": "~3.0",
+        "vlucas/phpdotenv": "^5.4",
+        "fakerphp/faker": "^1.20"
+    },
+    "autoload": {
+        "psr-4": {
+            "JLA\\": "src/Core/",
+            "APP\\": "App/"
+        }
+    }
+}

@@ -1,0 +1,54 @@
+version: "3.7"
+services:
+    php-mvc:
+        build:
+            args:
+                user: joseluisalfaro
+                uid: 1000
+            context: ./
+            dockerfile: Dockerfile
+        image: jla-mvc
+        container_name: jla-mvc-php
+        restart: unless-stopped
+        working_dir: /var/www/
+        volumes:
+            - ./:/var/www
+        networks:
+            jla-mvc-net:
+                ipv4_address: 172.10.2.4
+
+    dbtask:
+        image: mysql:8.0
+        container_name: jla-mvc-db
+        restart: unless-stopped
+        command: --default-authentication-plugin=mysql_native_password
+        environment:
+            MYSQL_DATABASE: jla-mvc-task
+            MYSQL_ROOT_PASSWORD: gpl3M8_JKKl01
+            MYSQL_PASSWORD: pN34c0l0_22
+            MYSQL_USER: admin
+            SERVICE_TAGS: dev
+            SERVICE_NAME: mysql
+        networks:
+            jla-mvc-net:
+                ipv4_address: 172.10.2.3
+    nginx:
+        image: nginx:alpine
+        container_name: jla-mvc-nginx
+        restart: unless-stopped
+        ports:
+            - 80:80
+        volumes:
+            - ./:/var/www
+            - ./.docker/nginx/:/etc/nginx/conf.d/
+        networks:
+            jla-mvc-net:
+                ipv4_address: 172.10.2.2
+
+networks:
+    jla-mvc-net:
+        driver: bridge
+        ipam:
+            driver: default
+            config:
+                - subnet: 172.10.2.0/23

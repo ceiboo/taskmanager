@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block body %}
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <div class="col-6">
+            <h1 class="h3 mb-2 text-gray-800">Tareas</h1>
+        </div>
+        <div class="d-none d-sm-inline-block">
+            <a href="{{DOMAIN}}/tasks/pending" class="btn btn-primary btn-icon-split mr-1">
+                <span class="icon text-white-50">
+                    <i class="fas fa-exclamation-triangle text-gray-300"></i>
+                </span>
+                <span class="text">Pendientes</span>
+            </a>
+            <a href="{{DOMAIN}}/tasks/progress" class="btn btn-warning btn-icon-split mr-1">
+                <span class="icon text-white-50">
+                    <i class="fas fa-calendar text-gray-300"></i>
+                </span>
+                <span class="text">En progreso</span>
+            </a>
+            <a href="{{DOMAIN}}/tasks/done" class="btn btn-success btn-icon-split mr-1">
+                <span class="icon text-white-50">
+                    <i class="fas fa-check text-gray-300"></i>
+                </span>
+                <span class="text">Resueltas</span>
+            </a>
+            <a href="{{DOMAIN}}/tasks" class="btn btn-info btn-icon-split mr-1">
+                <span class="icon text-white-50">
+                    <i class="fas fa-clipboard-list text-gray-300"></i>
+                </span>
+                <span class="text">Todas</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <a href="{{DOMAIN}}/task/add">add</a>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>User ID</th>
+                            <th>Title</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>ID</th>
+                            <th>User ID</th>
+                            <th>Title</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        {% for task in tasks %}
+                        <tr>
+                            <td>{{ task.id }}</td>
+                            <td>{{ task.user_id }}</td>
+                            <td>{{ task.title }}</td>
+                            <td class="text-{{ task.status }} font-weight-bold">{{ task.status }}</td>
+                            <td><a class="btn btn-info" href="{{DOMAIN}}/task/edit/{{ task.id }}"><i class="fas fa-edit"></i></a>
+                                <a class="btn btn-danger" href="{{DOMAIN}}/task/delete/{{ task.id }}"><i class="fas fa-trash"></i></a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- /.container-fluid -->
+
+{% endblock %}

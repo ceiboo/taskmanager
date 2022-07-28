@@ -3,8 +3,8 @@ Challenge by José Luis Alfaro
 
 ### Instalación ###
 * `git clone git@github.com:Ceiboo/taskmanager.git`
-* `cd php-mvc`
-* `docker-compose build taskmanager`
+* `cd taskmanager`
+* `docker-compose build php-mvc`
 * `docker-compose up -d`
 * `docker-compose exec php-mvc composer update`
 
